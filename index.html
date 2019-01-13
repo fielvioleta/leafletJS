@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Leaftlet Application</title>
+	<link rel="stylesheet" href="./node_modules/leaflet/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+ 	<script src="./node_modules/leaflet/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+ 	<script src="leaflet-providers.js"></script>
+ 	<style type="text/css">
+ 		#mapid { height: 580px; }
+ 	</style>
+</head>
+<body>
+	<div id="mapid"></div>
+
+	<script>
+		// basic
+		var lat = 14.5849347;
+		var long = 121.0561096;
+
+		var mapOptions = {
+			// lat , long
+			center: [lat, long],
+			zoom: 18
+		}
+
+		// initialize map
+		var map = new L.map('mapid', mapOptions);
+		
+		// add layout - required | Layout reference https://leaflet-extras.github.io/leaflet-providers/preview/
+		// There are providers that requires registration ref: https://github.com/leaflet-extras/leaflet-providers#user-content-providers-requiring-registration
+		var layer = new L.tileLayer.provider('OpenMapSurfer.Roads').addTo(map);
+		// var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+		// adding layer to the map
+		map.addLayer(layer);
+
+		//marker options 
+		var markerOptions = {
+			title: "Leaflet example",
+			clickable: true,
+			draggable: true
+		}
+
+		// create marker
+		var marker = new L.Marker([lat, long]);
+
+		// adding marker to the map
+		marker.addTo(map);
+		// marker popup
+		marker.bindPopup('Sm Megamall').openPopup();
+		
+
+	</script>
+</body>
+</html>
